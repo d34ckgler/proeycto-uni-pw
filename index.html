@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+        integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <title>TRIATLON</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Botones de paginacion -->
+        <div class="btn-box">
+            <button class="active" tab="#registro"><i class="fa fa-solid fa-user"></i>Registro</button>
+            <button tab="#eventos"><i class="fa fa-solid fa-person-swimming"></i>Eventos</button>
+            <button tab="#participantes"><i class="fa fa-solid fa-person-biking"></i>Participantes</button>
+            <button tab="#seguimiento"><i class="fa fa-solid fa-person-biking"></i>Seguimiento</button>
+        </div>
+
+        <div class="tab-content">
+            <div class="active" id="registro">
+                <form id="frm-registro">
+                    registro
+                </form>
+            </div>
+            <div id="participantes">
+                Participantes
+            </div>
+            <div id="seguimiento">
+                Seguimiento
+            </div>
+            <div id="eventos">
+                <!-- Caminata -->
+                <div class="content">
+                    <div class="content-left">
+                        <h1>Caminata 10K</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum optio dolores, soluta pariatur
+                            qui
+                            minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
+                            accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
+                        <a href="#">Enviar</a>
+                    </div>
+                    <div class="content-right">
+                        <img src="caminata.jpg" alt="Caminata">
+                    </div>
+                </div>
+
+                <!-- Biking -->
+                <div class="content">
+                    <div class="content-left">
+                        <h1>Ciclismo 30K</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum optio dolores, soluta pariatur
+                            qui
+                            minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
+                            accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
+                        <a href="#">Enviar</a>
+                    </div>
+                    <div class="content-right">
+                        <img src="ciclismo.jpg" alt="Caminata">
+                    </div>
+                </div>
+
+                <!-- swim -->
+                <div class="content">
+                    <div class="content-left">
+                        <h1>Natación 10K</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum optio dolores, soluta pariatur
+                            qui
+                            minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
+                            accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
+                        <a href="#">Enviar</a>
+                    </div>
+                    <div class="content-right">
+                        <img src="natacion.jpg" alt="Caminata">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/js.js"></script>
+</body>
+
+</html>

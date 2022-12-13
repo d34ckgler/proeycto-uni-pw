@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width:80%;
+    height: 450px;
+    position: relative;
+    margin: 100px auto;
+}
+
+.btn-box {
+    display: flex;
+
+    border-bottom: 1px solid #ccc;
+}
+
+/* i {
+    color:red;
+    background-color: red;
+} */
+
+.btn-box button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer; 
+    padding: 14px 16px;
+    margin-right: 50px;
+    font-size: 20px;
+}
+
+.btn-box>.active {
+    color: yellowgreen;
+}
+
+.btn-box .fa{
+    margin-right: 20px;
+}
+
+.btn-box button:hover .fa{
+    color: purple;
+}
+
+.content-right img {
+    width: 350px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5% auto;
+
+}
+
+
+
+.content-left {
+    flex-basis: 50%;
+}
+
+.content-left p {
+    font-size: 12px;
+    padding: 30px 0;
+}
+
+.content-left a {
+    width: 150px;
+    display: block;
+    padding: 8px 5px;
+    border-radius: 20px;
+    text-decoration: none;
+    background-color: papayawhip;
+    color: pink;
+    text-align: center;
+}
+
+.content-left a:hover {
+    color: rosybrown;
+}
+
+
+.content-right {
+    flex-basis: 50%;
+    text-align: center;
+}
+
+
+/* Eventos Pestanas */
+.tab-content {
+    margin: 10px;
+}
+.tab-content>div {
+    display: none;
+}
+.tab-content>.active {
+    display: block;
+}
+
