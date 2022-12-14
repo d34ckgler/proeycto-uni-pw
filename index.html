@@ -5,28 +5,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
-        integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <title>TRIATLON</title>
 </head>
 
 <body>
+    <div class="header">
+        <h1>Triatl&oacute;n - La Cava</h1>
+    </div>
     <div class="container">
         <!-- Botones de paginacion -->
         <div class="btn-box">
             <button class="active" tab="#registro"><i class="fa fa-solid fa-user"></i>Registro</button>
             <button tab="#eventos"><i class="fa fa-solid fa-person-swimming"></i>Eventos</button>
             <button tab="#participantes"><i class="fa fa-solid fa-person-biking"></i>Participantes</button>
-            <button tab="#seguimiento"><i class="fa fa-solid fa-person-biking"></i>Seguimiento</button>
+            <button tab="#seguimiento"><i class="fa fa-solid fa-chart-simple"></i>Seguimiento</button>
         </div>
 
         <div class="tab-content">
             <div class="active" id="registro">
                 <form id="frm-registro">
-                    registro
+                    <div class="form-control">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-control">
+                        <label for="cedula">C&eacute;dula:</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-control">
+                        <label for="municipio">Municipio:</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-control">
+                        <label for="edad">Edad:</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-control">
+                        <label for="hora_inicio">Hora inicio:</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-control">
+                        <label for="hora_fin">Hora fin:</label>
+                        <input type="text">
+                    </div>
                 </form>
             </div>
             <div id="participantes">
@@ -44,7 +68,7 @@
                             qui
                             minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
                             accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a href="#">Enviar</a>
+                        <a href="#">Seleccionar</a>
                     </div>
                     <div class="content-right">
                         <img src="caminata.jpg" alt="Caminata">
@@ -59,7 +83,7 @@
                             qui
                             minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
                             accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a href="#">Enviar</a>
+                        <a href="#">Seleccionar</a>
                     </div>
                     <div class="content-right">
                         <img src="ciclismo.jpg" alt="Caminata">
@@ -74,7 +98,7 @@
                             qui
                             minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
                             accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a href="#">Enviar</a>
+                        <a href="#">Seleccionar</a>
                     </div>
                     <div class="content-right">
                         <img src="natacion.jpg" alt="Caminata">
@@ -85,6 +109,7 @@
 
     </div>
 
+    <script src="assets/fontawesome/js/fontawesome.js"></script>
     <script src="assets/js/js.js"></script>
 </body>
 
