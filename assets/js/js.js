@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Componente btn-box
-    const tabButtons = document.querySelector('.btn-box');
+    // Componente menu
+    const tabButtons = document.querySelector('.menu');
     const tabButtonsCount = tabButtons.childElementCount;
 
     // Componente tab-content

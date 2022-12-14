@@ -12,12 +12,10 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>Triatl&oacute;n - La Cava</h1>
-    </div>
+    <h1 class="title">EVENTO TRIATLÓN 2022 </h1>
     <div class="container">
         <!-- Botones de paginacion -->
-        <div class="btn-box">
+        <div class="menu">
             <button class="active" tab="#registro"><i class="fa fa-solid fa-user"></i>Registro</button>
             <button tab="#eventos"><i class="fa fa-solid fa-person-swimming"></i>Eventos</button>
             <button tab="#participantes"><i class="fa fa-solid fa-person-biking"></i>Participantes</button>
@@ -25,36 +23,36 @@
         </div>
 
         <div class="tab-content">
-            <div class="active" id="registro">
+
+            <div class="active user" id="registro">
                 <form id="frm-registro">
                     <div class="form-control">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text">
+                        <!-- <label for="nombre">Nombre:</label> -->
+                        <input type="text" placeholder="Nombre">
                     </div>
                     <div class="form-control">
-                        <label for="cedula">C&eacute;dula:</label>
-                        <input type="text">
+                        <!-- <label for="cedula">C&eacute;dula:</label> -->
+                        <input type="text" placeholder=" Cédula ">
                     </div>
                     <div class="form-control">
-                        <label for="municipio">Municipio:</label>
-                        <input type="text">
+                        <!-- <label for="municipio">Municipio:</label> -->
+                        <input type="text" placeholder=" Municipio ">
                     </div>
                     <div class="form-control">
-                        <label for="edad">Edad:</label>
-                        <input type="text">
+                        <!-- <label for="edad">Edad:</label> -->
+                        <input type="text" placeholder=" Edad ">
                     </div>
                     <div class="form-control">
-                        <label for="hora_inicio">Hora inicio:</label>
-                        <input type="text">
+                        <!-- <label for="hora_inicio">Hora inicio:</label> -->
+                        <input type="text" placeholder=" hh:mm:ss ">
                     </div>
                     <div class="form-control">
-                        <label for="hora_fin">Hora fin:</label>
-                        <input type="text">
-                    </div>
-                    <div class="form-control">
-                        <button class="button-a">Registar participante</button>
+                        <!-- <label for="hora_fin">Hora fin:</label> -->
+                        <input type="text" placeholder=" hh:mm:ss ">
                     </div>
                 </form>
+
+                <button class="send-form">Enviar</button>
             </div>
             <div id="participantes">
                 Participantes
@@ -71,7 +69,7 @@
                             qui
                             minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
                             accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a class="button-a" href="#">Seleccionar</a>
+                        <a href="#">Enviar</a>
                     </div>
                     <div class="content-right">
                         <img src="caminata.jpg" alt="Caminata">
@@ -86,7 +84,7 @@
                             qui
                             minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
                             accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a class="button-a" href="#">Seleccionar</a>
+                        <a href="#">Enviar</a>
                     </div>
                     <div class="content-right">
                         <img src="ciclismo.jpg" alt="Caminata">
@@ -101,7 +99,7 @@
                             qui
                             minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
                             accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a class="button-a" href="#">Seleccionar</a>
+                        <a href="#">Enviar</a>
                     </div>
                     <div class="content-right">
                         <img src="natacion.jpg" alt="Caminata">
@@ -112,7 +110,6 @@
 
     </div>
 
-    <script src="assets/fontawesome/js/fontawesome.js"></script>
     <script src="assets/js/js.js"></script>
 </body>
 

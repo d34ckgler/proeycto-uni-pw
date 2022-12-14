@@ -5,26 +5,52 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.header {
-    margin: 50px auto;
+body {
+    background-image: url(https://triatletasenred.sport.es/wp-content/uploads/marathon.jpg);
+
+}
+
+.title {
+    padding-top: 60px;
+    padding-bottom: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 70px;
+    color: white;
     text-align: center;
 }
 
+/* Estilos Container main */
 .container {
-    width: 80%;
+    background-color: #fff;
+    width: 75%;
     height: 450px;
     position: relative;
-    margin: 50px auto;
+    margin: 100px auto;
+    border: 1px solid papayawhip;
+    border-radius: 25px;
+    height: auto;
+    box-shadow: 0px 0px 60px 5px rgba(0, 0, 0, 0.4);
+
+
 }
 
-.btn-box {
+/* Estilos manu */
+
+.menu {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     border-bottom: 1px solid #ccc;
+    margin: 5px;
 }
 
-.btn-box button {
+.menu>.active {
+    color: rgb(135, 135, 189, 0.8);
+}
+
+/* i {color:black;}*/
+
+.menu button {
     background: transparent;
     border: none;
     outline: none;
@@ -32,95 +58,82 @@
     padding: 14px 16px;
     margin-right: 50px;
     font-size: 20px;
+    flex: 1;
 }
 
-.btn-box>.active {
-    color: yellowgreen;
+.menu button:hover {
+    color: royalblue;
 }
 
-.btn-box .fa {
+.menu .fa {
     margin-right: 20px;
 }
 
-.btn-box button:hover .fa {
+.menu button:hover .fa {
     color: purple;
 }
 
-.content-right img {
-    width: 350px;
-}
+
+/* Estilos contenido EVENTOS */
 
 .content {
     display: flex;
     flex-wrap: wrap;
-    margin: 5% auto;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 40px;
+    /* margin-left: 40px; */
 
 }
 
+.content-right img {
+    max-width: 350px;
+    min-width: 300px;
+    width: 100%;
+    margin-left: 5px 10px 10px 5px;
+    border-radius: 10px;
+}
+
 .content-left {
-    flex-basis: 50%;
+    /* flex-basis: 50%; */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: justify;
+    align-items: center;
 }
 
 .content-left p {
     font-size: 12px;
-    text-align: justify;
     padding: 30px 0;
 }
 
-.button-a {
+.content-left a {
     width: 150px;
     display: block;
     padding: 8px 5px;
     border-radius: 20px;
     text-decoration: none;
-    background-color: rgba(255, 222, 6, 0.916);
-    color: black;
+    background-color: papayawhip;
+    color: pink;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.button-a:hover {
+.content-left a:hover {
     color: rosybrown;
 }
 
 
 .content-right {
-    flex-basis: 50%;
+    /* flex-basis: 50%; */
+    flex: 1;
     text-align: center;
 }
 
-/* Formulario de registro */
-#frm-registro {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-#frm-registro>.button-a {
-    width: 200px !important;
-}
-.form-control {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    font-weight: bold;
-    margin: 10px;
-}
-
-.form-control>input {
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 5px;
-    transition: 300ms all ease-in-out;
-}
-
-.form-control>input:hover {
-    border-color: rgba(255, 255, 0, 0.8);
-}
 
 /* Eventos Pestanas */
 .tab-content {
-    display: flex;
-    flex-direction: column;
     margin: 10px;
 }
 
@@ -130,4 +143,86 @@
 
 .tab-content>.active {
     display: block;
+}
+
+
+/* TAB REGISTRO */
+
+.user {
+    padding: 20px;
+    /* border-radius: 1px solid #ccc; */
+}
+
+/* BOTON REGistro */
+.send-form {
+    background-color: papayawhip;
+    color: purple;
+    cursor: pointer;
+    border: 0;
+    border-radius: 20px;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 7px;
+    width: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: lighter;
+
+    opacity: 0.5;
+
+    text-align: center;
+}
+
+.send-form:hover {
+    color: royalblue;
+}
+
+/* FORMULARIO */
+
+.form-control {
+    margin-top: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control input {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding-left: 20px;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    color: #776464;
+    font-weight: lighter;
+    -webkit-transition: .5s;
+    -moz-transition: .5;
+    transition: .5s;
+}
+
+input {
+    display: block;
+    height: 50px;
+    width: 70%;
+    margin: 0 auto;
+    border: none;
+}
+
+input::placeholder {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+}
+
+input:hover,
+input:focus {
+    color: purple;
+    outline: none;
+    border-bottom: 1px solid royalblue;
+}
+
+input placeholder {
+    color: purple;
+    position: relative;
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+
 }
