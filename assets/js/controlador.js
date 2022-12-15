@@ -10,6 +10,7 @@ class DataController {
         // Tiempo carrera en curso
         this.intervaloCarrera = null;
         this.horalCulminacion = 0;
+        this.hora = new Date();
 
         // Instanciacion de esquemas
         this.Participantes = new Esquema('participantes');
@@ -17,9 +18,27 @@ class DataController {
         this.Seguimiento = new Esquema('seguimiento');
     }
 
-    obtenerHora(fecha = new Date()) {
-        fecha.setHours(24);
-        return `${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
+    fijarHora(hora) {
+        let formatoHora = hora.split(':');
+        this.hora.setHours(formatoHora[0]);
+        this.hora.setMinutes(formatoHora[1]);
+        this.hora.setSeconds(formatoHora[2]);
+        let fecha = this.hora;
+        return `${fecha.getHours().toString().padStart(2, '0')}:${fecha.getMinutes().toString().padStart(2, '0')}:${fecha.getSeconds().toString().padStart(2, '0')}`;
+    }
+
+    obtenerHoraDate(hora) {
+        let formatoHora = hora.split(':');
+        hora = new Date();
+        hora.setHours(formatoHora[0]);
+        hora.setMinutes(formatoHora[1]);
+        hora.setSeconds(parseInt(formatoHora[2]) + 1);
+        return hora;
+    }
+
+    obtenerHora() {
+        let hora = new Date();
+        return `${hora.getHours().toString().padStart(2, '0')}:${hora.getMinutes().toString().padStart(2, '0')}:${hora.getSeconds().toString().padStart(2, '0')}`;
     }
 
     /**
@@ -108,13 +127,14 @@ class DataController {
             let htmlseguimientos = '';
             seguimientos.forEach(seguimiento => {
                 htmlseguimientos += `
-                    <tr class="${seguimiento.distancia >= evento.distancia ? 'llegada' : !seguimiento.descalificado ? 'corriendo' : 'descalificado' }">
+                    <tr class="${seguimiento.distancia >= evento.distancia ? 'llegada' : !seguimiento.descalificado ? 'corriendo' : 'descalificado'}">
                         <td>${seguimiento.cedula}</td>
                         <td>${seguimiento.nombre}</td>
                         <td>${seguimiento.edad}</td>
                         <td>${seguimiento.municipio}</td>
                         <td>${seguimiento.distancia}</td>
                         <td>${seguimiento.tiempo}</td>
+                        <td>${evento.hora_inicio}</td>
                         <td>${seguimiento.hora_llegada || '--:--:--'}</td>
                     </tr>`;
             });
@@ -145,33 +165,37 @@ class DataController {
      * estipulada en el campo de texto tipeado
      * @param {string} evento => nombre de evento
      */
-    registrarEvento(evento, hora = null) {
+    registrarEvento(evento, horaLlegada = null) {
         const frmEventos = document.getElementById('frm-eventos');
         const data = new FormData(frmEventos);
         let dataEvento = null;
 
-        if ((data.get(evento) && data.get(evento) !== '') || hora) {
+        if ((data.get(evento) && data.get(evento) !== '') || this.obtenerHora()) {
             const evt = this.Eventos.buscar().find(evt => evt.nombre === evento);
+
+            let horaInicio = horaLlegada || this.fijarHora(data.get(evento) || this.obtenerHora());
 
             if (!evt) {
                 dataEvento = this.Eventos.insertar({
                     nombre: evento,
-                    hora: data.get(evento) || hora,
-                    distancia: 400
+                    hora_inicio: horaInicio,
+                    hora_fin: null,
+                    distancia: 80
                 });
-
-                console.log(dataEvento);
             } else {
                 dataEvento = this.Eventos.actualizar({
                     ...evt,
-                    hora: data.get(evento) || hora,
-                    distancia: 400
+                    hora_inicio: horaInicio,
+                    hora_fin: null,
+                    distancia: 80
                 });
-                console.info(dataEvento);
 
                 // Iniciar evento
-                this.intervaloCarrera = null;
-                this.iniciarEvento(dataEvento.id);
+                // clearInterval(this.iniciarEvento);
+                if (!this.intervaloCarrera) {
+                    this.iniciarEvento(dataEvento.id);
+                    this.limpiarHora(dataEvento.nombre);
+                }
             }
         } else {
             alert('Debe ingresar una hora de culminacion para el evento.');
@@ -208,7 +232,8 @@ class DataController {
                         participante_id,
                         eventoId,
                         distancia: 0,
-                        tiempo: 0
+                        tiempo: 0,
+                        descalificado: false
                     }));
                 });
 
@@ -223,30 +248,53 @@ class DataController {
     }
 
     distanciaRandom(evento) {
-        return parseFloat((Math.random() * this.VELOCIDAD_MAXIMA[evento] + 1).toFixed(
+        return Math.random() * (this.VELOCIDAD_MAXIMA[evento] + 1);
+    }
+
+    formatoDistancia(evento, distancia) {
+        return parseFloat(distancia.toFixed(
             evento === 'natacion' ? 2 : 0
         ));
     }
 
     async actualizaSeguimiento(evento) {
         this.intervaloCarrera = setInterval(() => {
+            let horaActual = new Date();
+
+            if (horaActual.getTime() < this.obtenerHoraDate(evento.hora_inicio).getTime()) {
+                return
+            }
+
             let seguimientos = this.Seguimiento.buscar().filter(seguimiento => seguimiento.eventoId === evento.id);
 
             // Actualizar informacion de participantes en seguimiento
             seguimientos.forEach(seguimiento => {
+                let distancia = this.distanciaRandom(evento.nombre);
+                let distanciaTotal = this.formatoDistancia(evento.nombre, seguimiento.distancia + distancia);
                 // Si el participante culmina el evento no sigue contando
-                if (seguimiento.distancia >= evento.distancia || seguimiento.descalificado) {
-                    // seguimiento.distancia = evento.distancia;
+                if (distanciaTotal >= evento.distancia || distancia < 1) {
+                    if (seguimiento.hasOwnProperty('hora_llegada') === false) {
+                        // Actualizar hora
+                        this.Seguimiento.actualizar({
+                            ...seguimiento,
+                            distancia: distanciaTotal,
+                            tiempo: seguimiento.tiempo + 1,
+                            descalificado: distancia < 1 ? true : false,
+                            hora_llegada: distancia < 1 ? undefined : this.obtenerHora()
+                        });
+                    }
+
                     return;
                 }
 
-                let distancia = this.distanciaRandom(evento.nombre);
-                this.Seguimiento.actualizar({
-                    ...seguimiento,
-                    distancia: seguimiento.distancia + distancia,
-                    tiempo: seguimiento.tiempo + 1,
-                    descalificado: (distancia < 1) // retorna true si se cumple
-                });
+                if (seguimiento.descalificado == false) {
+                    this.Seguimiento.actualizar({
+                        ...seguimiento,
+                        distancia: distanciaTotal,
+                        tiempo: seguimiento.tiempo + 1,
+                        descalificado: distancia < 1 ? true : false
+                    });
+                }
             });
 
             seguimientos = this.Seguimiento.buscar().filter(seguimiento => seguimiento.eventoId === evento.id).sort((a, b) => {
@@ -255,21 +303,52 @@ class DataController {
                 }
             });
 
-            this.renderizarSeguimiento(evento, seguimientos);
+
 
             // Validamos si todos los participantes culminaron el evento para detener y reiniciar todo
-            if(!seguimientos.some(seguimiento.distancia < evento.distancia)) {
-                reiniciarEvento();
+            if (seguimientos.filter(seguimiento => seguimiento.distancia < evento.distancia).length === 0) {
+
+                seguimientos.sort((a, b) => {
+                    if (a.distancia > b.distancia && b.tiempo < a.tiempo) {
+                        return -1;
+                    }
+                });
+
+                this.reiniciarEvento(evento);
+            } else if (seguimientos.filter(seguimiento => seguimiento.descalificado === false).length === 0) {
+                this.reiniciarEvento(evento);
             }
+
+            this.renderizarSeguimiento(evento, seguimientos);
         }, 1000);
     }
 
-    reiniciarEvento() {
+    reiniciarEvento(evento) {
         clearInterval(this.intervaloCarrera);
-        this.horalCulminacion = this.obtenerHora();
+        this.intervaloCarrera = null;
+
+        // Actualizar fecha culminacion evento
+        let horaLlegada = this.fijarHora(this.obtenerHora());
+        this.Eventos.actualizar({
+            ...evento,
+            hora_llegada: horaLlegada
+        });
+
+
+        // Obtener (01) evento sin hora llegada
+        evento = this.Eventos.buscar().find(evt => !evt?.hora_llegada);
+
+        if (evento) {
+            // Actualizar e Iniciar evento
+            this.registrarEvento(evento.nombre, horaLlegada);
+            console.info("Evento actualizado", evento);
+        }
+    }
+
+    limpiarHora(evento) {
+        document.getElementsByName(evento)[0].value = "";
     }
 }
-
 
 /**
  * Inicializa la clase con los metodos necesarios
@@ -277,9 +356,7 @@ class DataController {
  */
 const dataController = new DataController();
 
-
-
 // Creando eventos
-dataController.registrarEvento('caminata', dataController.obtenerHora());
-dataController.registrarEvento('ciclismo', dataController.obtenerHora());
-dataController.registrarEvento('natacion', dataController.obtenerHora());
+dataController.registrarEvento('caminata');
+dataController.registrarEvento('ciclismo');
+dataController.registrarEvento('natacion');

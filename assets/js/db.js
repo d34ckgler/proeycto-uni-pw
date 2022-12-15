@@ -44,4 +44,33 @@ class Esquema {
             }
         }
     }
+
+    borrar(datos) {
+        if (!this.modelo || this.modelo === '') {
+            return null;
+        }
+
+        let mdl = this.modelo;
+
+        if (this.data && this.data[mdl]) {
+            let indexData = this.data[mdl].findIndex(item => item.id === datos.id);
+
+            delete this.data[mdl][indexData];
+            let nuevaData = this.data[mdl].filter(item => item);
+            this.data[mdl] = nuevaData;
+            return nuevaData;
+        }
+    }
+
+    truncar() {
+        if (!this.modelo || this.modelo === '') {
+            return null;
+        }
+
+        let mdl = this.modelo;
+
+        if (this.data && this.data[mdl]) {
+            this.data[mdl] = null;
+        }
+    }
 }
