@@ -306,6 +306,17 @@ tbody>.active {
     background-color: greenyellow;
 }
 
+/* Clases de posicionamiento de participantes en eventos */
+tbody>.llegada {
+    background-color: rgb(89, 161, 60);
+}
+tbody>.corriendo {
+    background-color: rgb(91, 183, 211);
+}
+tbody>.descalificado {
+    background-color: rgb(236, 16, 16);
+}
+
 .container-tabla-seguimiento {
     display: flex;
     justify-content: center;

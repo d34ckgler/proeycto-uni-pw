@@ -1,9 +1,11 @@
 class DataController {
     constructor() {
         // Variables limites
-        this.VMC = 7;
-        this.VMN = 1.72;
-        this.VMCC = 45;
+        this.VELOCIDAD_MAXIMA = {
+            caminata: 7,
+            ciclismo: 45,
+            natacion: 1.72
+        };
 
         // Tiempo carrera en curso
         this.intervaloCarrera = null;
@@ -98,19 +100,22 @@ class DataController {
      * Renderiza la lista de participantes en evento en curso
      * en la coleccion del esquema (seguimiento)
      */
-    renderizarSeguimiento(evento) {
-        let elemento = document.getElementById('data-seguimiento-' + evento);
-        let seguimientos = this.Seguimiento.buscar();
+    renderizarSeguimiento(evento, seguimientos) {
+        let elemento = document.getElementById('data-seguimiento-' + evento.nombre);
+        // let seguimientos = this.Seguimiento.buscar();
 
         if (elemento && seguimientos && seguimientos.length > 0) {
             let htmlseguimientos = '';
             seguimientos.forEach(seguimiento => {
                 htmlseguimientos += `
-                    <tr>
+                    <tr class="${seguimiento.distancia >= evento.distancia ? 'llegada' : !seguimiento.descalificado ? 'corriendo' : 'descalificado' }">
                         <td>${seguimiento.cedula}</td>
                         <td>${seguimiento.nombre}</td>
                         <td>${seguimiento.edad}</td>
                         <td>${seguimiento.municipio}</td>
+                        <td>${seguimiento.distancia}</td>
+                        <td>${seguimiento.tiempo}</td>
+                        <td>${seguimiento.hora_llegada || '--:--:--'}</td>
                     </tr>`;
             });
 
@@ -151,14 +156,16 @@ class DataController {
             if (!evt) {
                 dataEvento = this.Eventos.insertar({
                     nombre: evento,
-                    hora: data.get(evento) || hora
+                    hora: data.get(evento) || hora,
+                    distancia: 400
                 });
 
                 console.log(dataEvento);
             } else {
                 dataEvento = this.Eventos.actualizar({
                     ...evt,
-                    hora: data.get(evento) || hora
+                    hora: data.get(evento) || hora,
+                    distancia: 400
                 });
                 console.info(dataEvento);
 
@@ -206,11 +213,60 @@ class DataController {
                 });
 
                 // Se llama al renderizado para la tabla de seguimiento
-                this.renderizarSeguimiento(evento.nombre, seguimientos);
+                this.renderizarSeguimiento(evento, seguimientos);
+                this.actualizaSeguimiento(evento);
+
             }
         } else {
             alert('El evento seleccionado no existe!')
         }
+    }
+
+    distanciaRandom(evento) {
+        return parseFloat((Math.random() * this.VELOCIDAD_MAXIMA[evento] + 1).toFixed(
+            evento === 'natacion' ? 2 : 0
+        ));
+    }
+
+    async actualizaSeguimiento(evento) {
+        this.intervaloCarrera = setInterval(() => {
+            let seguimientos = this.Seguimiento.buscar().filter(seguimiento => seguimiento.eventoId === evento.id);
+
+            // Actualizar informacion de participantes en seguimiento
+            seguimientos.forEach(seguimiento => {
+                // Si el participante culmina el evento no sigue contando
+                if (seguimiento.distancia >= evento.distancia || seguimiento.descalificado) {
+                    // seguimiento.distancia = evento.distancia;
+                    return;
+                }
+
+                let distancia = this.distanciaRandom(evento.nombre);
+                this.Seguimiento.actualizar({
+                    ...seguimiento,
+                    distancia: seguimiento.distancia + distancia,
+                    tiempo: seguimiento.tiempo + 1,
+                    descalificado: (distancia < 1) // retorna true si se cumple
+                });
+            });
+
+            seguimientos = this.Seguimiento.buscar().filter(seguimiento => seguimiento.eventoId === evento.id).sort((a, b) => {
+                if (a.distancia > b.distancia) {
+                    return -1;
+                }
+            });
+
+            this.renderizarSeguimiento(evento, seguimientos);
+
+            // Validamos si todos los participantes culminaron el evento para detener y reiniciar todo
+            if(!seguimientos.some(seguimiento.distancia < evento.distancia)) {
+                reiniciarEvento();
+            }
+        }, 1000);
+    }
+
+    reiniciarEvento() {
+        clearInterval(this.intervaloCarrera);
+        this.horalCulminacion = this.obtenerHora();
     }
 }
 
