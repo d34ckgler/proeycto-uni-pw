@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -88,9 +88,9 @@ body {
 
 .content-right img {
     max-width: 350px;
-    min-width: 300px;
+    min-width: 200px;
     width: 100%;
-    margin-left: 5px 10px 10px 5px;
+    margin: 0px;
     border-radius: 10px;
 }
 
@@ -99,30 +99,63 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
-    text-align: justify;
+    text-align: center;
     align-items: center;
+    margin-left: -9px;
 }
 
 .content-left p {
-    font-size: 12px;
-    padding: 30px 0;
+    font-size: 18px;
+    padding: 30px;
+    font-family: 'Open Sans', sans-serif;
+
 }
 
-.content-left a {
-    width: 150px;
+.content-left button {
+    width: 90px;
     display: block;
     padding: 8px 5px;
     border-radius: 20px;
-    text-decoration: none;
+    /* text-decoration: none; */
     background-color: papayawhip;
-    color: pink;
+    color: rosybrown;
     text-align: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    cursor: pointer;
+    border: 0px;
 }
 
-.content-left a:hover {
-    color: rosybrown;
+.content-left button:hover {
+    font-weight: bolder;
 }
+
+.container-end_send {
+    display:flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    padding: 30px;
+    
+}
+
+.end-hour {
+    width: 38%;
+    height: 30px;
+    color:indigo;
+    border: none;
+    text-align: center;
+    margin: 0px 5px ;
+}
+
+.end-hour:hover, .end-hour:focus{
+    color:black;
+    border-bottom: 1px solid papayawhip;
+}
+
+
+/* .send {
+    width: 90px;
+} */
+
 
 
 .content-right {
@@ -152,23 +185,26 @@ body {
     padding: 20px;
     /* border-radius: 1px solid #ccc; */
 }
+.user h2 {
+    text-align: center;
+    margin: 10px;
+    color: royalblue;
+}
 
-/* BOTON REGistro */
+/* BOTON REGISTRO */
 .send-form {
-    background-color: papayawhip;
+    background-color: rgb(246, 255, 0);
     color: purple;
     cursor: pointer;
     border: 0;
     border-radius: 20px;
     display: block;
-    margin: 20px auto;
+    /* margin: 20px auto; */
     padding: 10px 7px;
-    width: 150px;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    font-weight: lighter;
-
-    opacity: 0.5;
+    font-weight: 600;
 
     text-align: center;
 }
@@ -176,6 +212,7 @@ body {
 .send-form:hover {
     color: royalblue;
 }
+
 
 /* FORMULARIO */
 
@@ -197,6 +234,10 @@ body {
     -webkit-transition: .5s;
     -moz-transition: .5;
     transition: .5s;
+}
+
+.form-control button {
+    width: 80%;
 }
 
 input {
@@ -225,4 +266,30 @@ input placeholder {
     -webkit-transform: translateY(-20px);
     transform: translateY(-20px);
 
+}
+
+
+/* TABLA DE PARTICIPANTES INSCRITOS*/
+.container-tabla {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;  
+    margin: 20px; 
+}
+.container-tabla-titulo {
+    margin-bottom: 40px;
+}
+.tabla-main {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+tbody>tr {
+    height: 30px;
+    transition: .5s;
+}
+tbody>tr:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
 }

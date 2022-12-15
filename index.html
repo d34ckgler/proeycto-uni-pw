@@ -25,92 +25,161 @@
         <div class="tab-content">
 
             <div class="active user" id="registro">
+                <h2>Registro de Participantes</h2>
                 <form id="frm-registro">
                     <div class="form-control">
                         <!-- <label for="nombre">Nombre:</label> -->
-                        <input type="text" placeholder="Nombre">
+                        <input name="nombre" type="text" placeholder="Nombre">
                     </div>
                     <div class="form-control">
                         <!-- <label for="cedula">C&eacute;dula:</label> -->
-                        <input type="text" placeholder=" Cédula ">
+                        <input name="cedula" type="text" placeholder=" Cédula ">
                     </div>
                     <div class="form-control">
                         <!-- <label for="municipio">Municipio:</label> -->
-                        <input type="text" placeholder=" Municipio ">
+                        <input name="municipio" type="text" placeholder=" Municipio ">
                     </div>
                     <div class="form-control">
                         <!-- <label for="edad">Edad:</label> -->
-                        <input type="text" placeholder=" Edad ">
+                        <input name="edad" type="text" placeholder=" Edad ">
                     </div>
                     <div class="form-control">
                         <!-- <label for="hora_inicio">Hora inicio:</label> -->
-                        <input type="text" placeholder=" hh:mm:ss ">
+                        <input name="hora_inicio" type="text" placeholder=" hh:mm:ss ">
                     </div>
                     <div class="form-control">
                         <!-- <label for="hora_fin">Hora fin:</label> -->
-                        <input type="text" placeholder=" hh:mm:ss ">
+                        <input name="hora_fin" type="text" placeholder=" hh:mm:ss ">
+                    </div>
+                    <div class="form-control">
+                        <button type="button" class="send-form" onclick="dataController.registro()">Inscripir
+                            Participante</button>
                     </div>
                 </form>
 
-                <button class="send-form">Enviar</button>
             </div>
             <div id="participantes">
-                Participantes
+                <div class="container-tabla">
+                    <div class="container-tabla-titulo">
+                        <h2>Tabla de participantes inscritos</h2>
+                    </div>
+                    <table class="tabla-main">
+                        <thead>
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th>CEDULA</th>
+                                <th>EDAD</th>
+                                <th>MUNICIPIO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-participantes">
+                            <tr>
+                                <td colspan="4">No hay participantes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="seguimiento">
-                Seguimiento
+                <div class="container-tabla">
+
+                    <h2>Actualización de los participantes en la carrera</h2>
+                    <table class="tabla_main">
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>CEDULA</th>
+                            <th>EDAD</th>
+                            <th>MUNICIPIO</th>
+                        </tr>
+                        <tr>
+                            <td>Maria</td>
+                            <td>111111</td>
+                            <td>11</td>
+                            <td>A</td>
+
+                        </tr>
+                        <tr>
+                            <td>Nario</td>
+                            <td>2222</td>
+                            <td>21</td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>Otto</td>
+                            <td>33333</td>
+                            <td>23</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>Pan</td>
+                            <td>4444</td>
+                            <td>33</td>
+                            <td>D</td>
+                        </tr>
+                        <tr>
+                            <td>Will</td>
+                            <td>5555</td>
+                            <td>18</td>
+                            <td>E</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="eventos">
-                <!-- Caminata -->
-                <div class="content">
-                    <div class="content-left">
-                        <h1>Caminata 10K</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum optio dolores, soluta pariatur
-                            qui
-                            minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
-                            accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a href="#">Enviar</a>
+                <form id="frm-eventos">
+                    <!-- Caminata -->
+                    <div class="content">
+                        <div class="content-left">
+                            <h1>Caminata 10K</h1> <!-- style="color:sandybrown;" -->
+                            <p>Introduzca la hora de finalización de la competencia de caminata 10K.</p>
+                            <div class="container-end_send">
+                                <input name="caminata" class="end-hour" type="text" placeholder=" HH:MM:SS ">
+                                <button type="button" onclick="dataController.registrarEvento('caminata')">Aplicar</button>
+                            </div>
+                        </div>
+                        <div class="content-right">
+                            <img src="caminata.jpg" alt="Caminata">
+                        </div>
                     </div>
-                    <div class="content-right">
-                        <img src="caminata.jpg" alt="Caminata">
-                    </div>
-                </div>
 
-                <!-- Biking -->
-                <div class="content">
-                    <div class="content-left">
-                        <h1>Ciclismo 30K</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum optio dolores, soluta pariatur
-                            qui
-                            minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
-                            accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a href="#">Enviar</a>
+                    <!-- Biking -->
+                    <div class="content">
+                        <div class="content-left">
+                            <h1>Ciclismo 30K</h1> <!-- style="color: seagreen;" -->
+                            <p>Introduzca la hora de finalización de la competencia de ciclismo 30K.</p>
+                            <div class="container-end_send">
+                                <input name="ciclismo" class="end-hour" type="text" placeholder=" HH:MM:SS ">
+                                <button type="button" onclick="dataController.registrarEvento('ciclismo')">Aplicar</button>
+                            </div>
+                        </div>
+                        <div class="content-right">
+                            <img src="ciclismo.jpg" alt="Caminata">
+                        </div>
                     </div>
-                    <div class="content-right">
-                        <img src="ciclismo.jpg" alt="Caminata">
-                    </div>
-                </div>
 
-                <!-- swim -->
-                <div class="content">
-                    <div class="content-left">
-                        <h1>Natación 10K</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum optio dolores, soluta pariatur
-                            qui
-                            minima fugit quam exercitationem ex consectetur distinctio beatae maxime necessitatibus
-                            accusamus. Veniam fugit tenetur possimus deserunt!Lorem</p>
-                        <a href="#">Enviar</a>
+                    <!-- swim -->
+                    <div class="content">
+                        <div class="content-left">
+                            <h1>Natación 10K</h1> <!-- style="color: steelblue;" -->
+                            <p>Introduzca la hora de finalización de la competencia de natación 10K</p>
+                            <div class="container-end_send">
+                                <input name="natacion" class="end-hour" type="text" placeholder=" HH:MM:SS ">
+                                <button type="button" onclick="dataController.registrarEvento('natacion')">Aplicar</button>
+                            </div>
+                        </div>
+                        <div class="content-right">
+                            <img src="natacion.jpg" alt="Caminata">
+                        </div>
                     </div>
-                    <div class="content-right">
-                        <img src="natacion.jpg" alt="Caminata">
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
     </div>
 
     <script src="assets/js/js.js"></script>
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/controlador.js"></script>
 </body>
 
 </html>
