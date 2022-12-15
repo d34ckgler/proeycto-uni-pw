@@ -17,13 +17,12 @@
         <!-- Botones de paginacion -->
         <div class="menu">
             <button class="active" tab="#registro"><i class="fa fa-solid fa-user"></i>Registro</button>
-            <button tab="#eventos"><i class="fa fa-solid fa-person-swimming"></i>Eventos</button>
             <button tab="#participantes"><i class="fa fa-solid fa-person-biking"></i>Participantes</button>
+            <button tab="#eventos"><i class="fa fa-solid fa-person-swimming"></i>Eventos</button>
             <button tab="#seguimiento"><i class="fa fa-solid fa-chart-simple"></i>Seguimiento</button>
         </div>
 
         <div class="tab-content">
-
             <div class="active user" id="registro">
                 <h2>Registro de Participantes</h2>
                 <form id="frm-registro">
@@ -44,14 +43,6 @@
                         <input name="edad" type="text" placeholder=" Edad ">
                     </div>
                     <div class="form-control">
-                        <!-- <label for="hora_inicio">Hora inicio:</label> -->
-                        <input name="hora_inicio" type="text" placeholder=" hh:mm:ss ">
-                    </div>
-                    <div class="form-control">
-                        <!-- <label for="hora_fin">Hora fin:</label> -->
-                        <input name="hora_fin" type="text" placeholder=" hh:mm:ss ">
-                    </div>
-                    <div class="form-control">
                         <button type="button" class="send-form" onclick="dataController.registro()">Inscripir
                             Participante</button>
                     </div>
@@ -66,8 +57,8 @@
                     <table class="tabla-main">
                         <thead>
                             <tr>
-                                <th>NOMBRE</th>
                                 <th>CEDULA</th>
+                                <th>NOMBRE</th>
                                 <th>EDAD</th>
                                 <th>MUNICIPIO</th>
                             </tr>
@@ -81,47 +72,64 @@
                 </div>
             </div>
             <div id="seguimiento">
-                <div class="container-tabla">
-
-                    <h2>Actualización de los participantes en la carrera</h2>
+                <div class="container-tabla-seguimiento">
+                    <div class="container-tabla-titulo">
+                        <h2>Actualización Caminata</h2>
+                    </div>
                     <table class="tabla_main">
-                        <tr>
-                            <th>NOMBRE</th>
-                            <th>CEDULA</th>
-                            <th>EDAD</th>
-                            <th>MUNICIPIO</th>
-                        </tr>
-                        <tr>
-                            <td>Maria</td>
-                            <td>111111</td>
-                            <td>11</td>
-                            <td>A</td>
-
-                        </tr>
-                        <tr>
-                            <td>Nario</td>
-                            <td>2222</td>
-                            <td>21</td>
-                            <td>B</td>
-                        </tr>
-                        <tr>
-                            <td>Otto</td>
-                            <td>33333</td>
-                            <td>23</td>
-                            <td>C</td>
-                        </tr>
-                        <tr>
-                            <td>Pan</td>
-                            <td>4444</td>
-                            <td>33</td>
-                            <td>D</td>
-                        </tr>
-                        <tr>
-                            <td>Will</td>
-                            <td>5555</td>
-                            <td>18</td>
-                            <td>E</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>CEDULA</th>
+                                <th>NOMBRE</th>
+                                <th>EDAD</th>
+                                <th>MUNICIPIO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-seguimiento-caminata">
+                            <tr>
+                                <td colspan="4">No ha iniciado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container-tabla-seguimiento">
+                    <div class="container-tabla-titulo">
+                        <h2>Actualización Ciclismo</h2>
+                    </div>
+                    <table class="tabla_main">
+                        <thead>
+                            <tr>
+                                <th>CEDULA</th>
+                                <th>NOMBRE</th>
+                                <th>EDAD</th>
+                                <th>MUNICIPIO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-seguimiento-ciclismo">
+                            <tr>
+                                <td colspan="4">No ha iniciado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container-tabla-seguimiento">
+                    <div class="container-tabla-titulo">
+                        <h2>Actualización Natacion</h2>
+                    </div>
+                    <table class="tabla_main">
+                        <thead>
+                            <tr>
+                                <th>CEDULA</th>
+                                <th>NOMBRE</th>
+                                <th>EDAD</th>
+                                <th>MUNICIPIO</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-seguimiento-natacion">
+                            <tr>
+                                <td colspan="4">No ha iniciado</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -134,7 +142,8 @@
                             <p>Introduzca la hora de finalización de la competencia de caminata 10K.</p>
                             <div class="container-end_send">
                                 <input name="caminata" class="end-hour" type="text" placeholder=" HH:MM:SS ">
-                                <button type="button" onclick="dataController.registrarEvento('caminata')">Aplicar</button>
+                                <button type="button"
+                                    onclick="dataController.registrarEvento('caminata')">Iniciar</button>
                             </div>
                         </div>
                         <div class="content-right">
@@ -149,7 +158,8 @@
                             <p>Introduzca la hora de finalización de la competencia de ciclismo 30K.</p>
                             <div class="container-end_send">
                                 <input name="ciclismo" class="end-hour" type="text" placeholder=" HH:MM:SS ">
-                                <button type="button" onclick="dataController.registrarEvento('ciclismo')">Aplicar</button>
+                                <button type="button"
+                                    onclick="dataController.registrarEvento('ciclismo')">Aplicar</button>
                             </div>
                         </div>
                         <div class="content-right">
@@ -164,7 +174,8 @@
                             <p>Introduzca la hora de finalización de la competencia de natación 10K</p>
                             <div class="container-end_send">
                                 <input name="natacion" class="end-hour" type="text" placeholder=" HH:MM:SS ">
-                                <button type="button" onclick="dataController.registrarEvento('natacion')">Aplicar</button>
+                                <button type="button"
+                                    onclick="dataController.registrarEvento('natacion')">Aplicar</button>
                             </div>
                         </div>
                         <div class="content-right">

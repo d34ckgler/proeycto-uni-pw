@@ -130,24 +130,25 @@ body {
 }
 
 .container-end_send {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     /* align-items: center; */
     padding: 30px;
-    
+
 }
 
 .end-hour {
     width: 38%;
     height: 30px;
-    color:indigo;
+    color: indigo;
     border: none;
     text-align: center;
-    margin: 0px 5px ;
+    margin: 0px 5px;
 }
 
-.end-hour:hover, .end-hour:focus{
-    color:black;
+.end-hour:hover,
+.end-hour:focus {
+    color: black;
     border-bottom: 1px solid papayawhip;
 }
 
@@ -185,6 +186,7 @@ body {
     padding: 20px;
     /* border-radius: 1px solid #ccc; */
 }
+
 .user h2 {
     text-align: center;
     margin: 10px;
@@ -274,22 +276,43 @@ input placeholder {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    text-align: center;  
-    margin: 20px; 
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
 }
+
 .container-tabla-titulo {
+    color: cornflowerblue;
     margin-bottom: 40px;
 }
+
 .tabla-main {
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
 }
+
 tbody>tr {
     height: 30px;
     transition: .5s;
 }
+
 tbody>tr:hover {
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+tbody>.active {
+    background-color: greenyellow;
+}
+
+.container-tabla-seguimiento {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    box-shadow: #c9c9ce 2px 2px 2px 2px;
+    border-radius: 15px 15px 0px 0px;
 }
