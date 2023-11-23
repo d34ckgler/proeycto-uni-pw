@@ -57,6 +57,8 @@ class DataController {
             return alert('El nombre es un campo obligatorio');
         } else if (data.get('cedula') === '') {
             return alert('El cedula es un campo obligatorio');
+        } else if (data.get('cedula').length >= 7 || data.get('cedula').length <= 10) {
+           return alert('La cedula debe contener almenos (07) a (10) digitos.'); 
         } else if (data.get('municipio') === '') {
             return alert('El municipio es un campo obligatorio');
         } else if (data.get('edad') === '') {
